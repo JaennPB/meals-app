@@ -1,21 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import AppLoading from "expo-app-loading";
+import { useFonts } from "expo-font";
+
+import AllCategoriesScreen from "./screens/AllCategoriesScreen";
+import CategoryMealsScreen from "./screens/CategoryMealScreen";
+import MealDetailsScreen from "./screens/MealDetailsScreen";
+
+const Stack = createNativeStackNavigator();
+
+const App = () => {
+  let [fontsLoaded] = useFonts({
+    customLight: require("./assets/fonts/Montserrat-ExtraLight.ttf"),
+    customRegular: require("./assets/fonts/Montserrat-Regular.ttf"),
+    customBold: require("./assets/fonts/Montserrat-SemiBold.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Categories">
+          <Stack.Screen name="AllCategories" component={AllCategoriesScreen} />
+          <Stack.Screen name="CategoryMeals" component={CategoryMealsScreen} />
+          <Stack.Screen name="MealDetails" component={MealDetailsScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+};
+
+export default App;
