@@ -1,20 +1,27 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { FlatList } from "react-native";
+
+import CategoryCard from "../components/CategoryCard";
+
+import { CATEGORIES } from "../data/dummyData";
 
 const CategoriesScreen = (props) => {
-  return (
-    <View style={styles.screen}>
-      <Text>The categories screen!</Text>
-    </View>
-  );
-};
+  const renderItem = (item) => {
+    return (
+      <CategoryCard
+        title={item.item.title}
+        color={item.item.color}
+        onPress={() => {
+          props.navigation.navigate("CategoryMeals", {
+            itemId: item.item.id,
+            itemTitle: item.item.title,
+          });
+        }}
+      />
+    );
+  };
 
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+  return <FlatList data={CATEGORIES} renderItem={renderItem} numColumns={2} />;
+};
 
 export default CategoriesScreen;
