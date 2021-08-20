@@ -1,8 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 
-import fonts from "../theme/fonts";
-
 const CategoryCard = (props) => {
   const cardStyles = (pressed) => {
     let updatedStyles = [
@@ -22,7 +20,7 @@ const CategoryCard = (props) => {
       style={({ pressed }) => cardStyles(pressed)}
       onPress={props.onPress}
     >
-      <Text style={[fonts.boldText, styles.text]} numberOfLines={2}>
+      <Text style={styles.text} numberOfLines={2}>
         {props.title}
       </Text>
     </Pressable>
@@ -42,6 +40,7 @@ const styles = StyleSheet.create({
   text: {
     color: "white",
     fontSize: 18,
+    fontFamily: "customBold",
   },
 });
 

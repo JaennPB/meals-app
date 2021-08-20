@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   titleContainer: {
-    backgroundColor: theme.colors.accent,
+    backgroundColor: theme.colors.accent + 70,
   },
   title: {
     fontSize: 20,
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   infoContainer: {
-    backgroundColor: theme.colors.accent,
+    backgroundColor: "grey",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",

@@ -6,7 +6,7 @@ export const CATEGORIES = [
   new Category("c2", "Quick & Easy", "#f54242"),
   new Category("c3", "Hamburgers", "#f5a442"),
   new Category("c4", "German", "#f5d142"),
-  new Category("c5", "Light & Lovely", "#368dff"),
+  new Category("c5", "Light & Fresh", "#368dff"),
   new Category("c6", "Exotic", "#41d95d"),
   new Category("c7", "Breakfast", "#9eecff"),
   new Category("c8", "Asian", "#b9ffb0"),
@@ -21,7 +21,7 @@ export const MEALS = [
     "Spaghetti with Tomato Sauce",
     "affordable",
     "simple",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg/800px-Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg",
+    "https://w6h5a5r4.rocketcdn.me/wp-content/uploads/2019/05/espaguetis-a-la-bolonesa-1080x671.jpg",
     20,
     [
       "4 Tomatoes",

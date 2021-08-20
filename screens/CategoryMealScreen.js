@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, FlatList, View } from "react-native";
+import { FlatList } from "react-native";
 
 import { MEALS } from "../data/dummyData";
 
@@ -15,7 +15,12 @@ const CategoryMealsScreen = (props) => {
   const renderItem = (item) => {
     return (
       <MealCard
-        onPress={() => {}}
+        onPress={() => {
+          props.navigation.navigate("MealDetails", {
+            itemId: item.item.id,
+            itemTitle: item.item.title,
+          });
+        }}
         title={item.item.title}
         duration={item.item.duration}
         affordability={item.item.affordability}
