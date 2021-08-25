@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 
-import TabNavigator from "./components/navigation/TabNavigator";
+import DrawerNavigator from "./components/navigation/DrawerNavigator";
 
 const App = () => {
   let [fontsLoaded] = useFonts({
@@ -17,7 +17,7 @@ const App = () => {
   } else {
     return (
       <NavigationContainer>
-        <TabNavigator />
+        <DrawerNavigator />
       </NavigationContainer>
     );
   }

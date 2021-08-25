@@ -1,9 +1,8 @@
 import React from "react";
 import { FlatList } from "react-native";
 
-import { MEALS } from "../data/dummyData";
-
 import MealCard from "../components/MealCard";
+import { MEALS } from "../data/dummyData";
 
 const CategoryMealsScreen = (props) => {
   const { itemId } = props.route.params;

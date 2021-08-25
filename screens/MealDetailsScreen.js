@@ -1,6 +1,14 @@
 import React, { useLayoutEffect, useState } from "react";
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Pressable,
+  ScrollView,
+  Image,
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
 import { MEALS } from "../data/dummyData";
 
@@ -34,17 +42,61 @@ const MealDetailsScreen = (props) => {
   const selectedMeal = MEALS.find((meal) => meal.id === itemId);
 
   return (
-    <View style={styles.screen}>
-      <Text>{selectedMeal.title}</Text>
-    </View>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Image source={{ uri: selectedMeal.imageUrl }} style={styles.image} />
+      <View style={styles.details}>
+        <Text style={styles.text}>{selectedMeal.duration}min</Text>
+        <Text style={styles.text}>{selectedMeal.complexity}</Text>
+        <Text style={styles.text}>{selectedMeal.affordability}</Text>
+      </View>
+      <Text style={styles.textTitle}>Ingredients</Text>
+      {selectedMeal.ingredients.map((ing) => (
+        <View style={styles.itemContainer} key={ing}>
+          <Entypo name="dot-single" size={24} color={theme.colors.primary} />
+          <Text style={styles.normalText}>{ing}</Text>
+        </View>
+      ))}
+      <Text style={styles.textTitle}>Preparation</Text>
+      {selectedMeal.steps.map((step) => (
+        <View style={styles.itemContainer} key={step}>
+          <Entypo name="dot-single" size={24} color={theme.colors.primary} />
+          <Text style={styles.normalText}>{step}</Text>
+        </View>
+      ))}
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
+  text: {
+    fontFamily: "customRegular",
+    color: "white",
+  },
+  textTitle: {
+    fontSize: 18,
+    fontFamily: "customBold",
+    textAlign: "center",
+    paddingVertical: 20,
+  },
+  normalText: {
+    fontFamily: "customRegular",
+    paddingRight: 20,
+  },
+  image: {
+    height: 250,
+    width: "100%",
+  },
+  details: {
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-around",
+    backgroundColor: theme.colors.accent,
+    padding: 10,
+  },
+  itemContainer: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    paddingHorizontal: 20,
   },
 });
 

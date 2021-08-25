@@ -24,7 +24,7 @@ const MealCard = (props) => {
           </ImageBackground>
         </View>
         <View style={styles.infoContainer}>
-          <Text style={styles.infoText}>{props.duration}m</Text>
+          <Text style={styles.infoText}>{props.duration}min</Text>
           <Text style={styles.infoText}>{props.complexity}</Text>
           <Text style={styles.infoText}>{props.affordability}</Text>
         </View>

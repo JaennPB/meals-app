@@ -19,6 +19,10 @@ const StackNavigator = (props) => {
           fontFamily: "customRegular",
           fontSize: 18,
         },
+        headerBackTitleStyle: {
+          fontFamily: "customRegular",
+          fontSize: 15,
+        },
       }}
     >
       <Stack.Screen

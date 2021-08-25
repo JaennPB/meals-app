@@ -5,6 +5,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 import StackNavigator from "./StackNavigator";
 import FavoritesScreen from "../../screens/FavoritesScreen";
+
 import theme from "../../theme/theme";
 
 const Tabs = createBottomTabNavigator();
@@ -19,12 +20,14 @@ const TabNavigator = (props) => {
           fontSize: 12,
         },
         tabBarStyle: {
-          padding: 5,
+          paddingBottom: 5,
+          paddingTop: 5,
+          height: 60,
         },
       }}
     >
       <Tabs.Screen
-        name="Meals"
+        name="All Meals"
         component={StackNavigator}
         options={{
           tabBarIcon: ({ focused, color, size }) => {
