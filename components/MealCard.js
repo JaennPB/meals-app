@@ -23,11 +23,11 @@ const MealCard = (props) => {
             </View>
           </ImageBackground>
         </View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.infoText}>{props.duration}min</Text>
+        {/* <View style={styles.infoContainer}> */}
+        {/* <Text style={styles.infoText}>{props.duration}min</Text>
           <Text style={styles.infoText}>{props.complexity}</Text>
-          <Text style={styles.infoText}>{props.affordability}</Text>
-        </View>
+          <Text style={styles.infoText}>{props.affordability}</Text> */}
+        {/* </View> */}
       </Pressable>
     </View>
   );

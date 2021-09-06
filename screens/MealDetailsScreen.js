@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -9,13 +9,22 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { useSelector, useDispatch } from "react-redux";
 
-import { MEALS } from "../data/dummyData";
+import { fetchMealDetails } from "../store/mealsSlice";
 
 import theme from "../theme/theme";
 
 const MealDetailsScreen = (props) => {
+  const { id } = props.route.params;
+  const meal = useSelector((state) => state.meals.mealDetails);
+  const dispatch = useDispatch();
+
   const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchMealDetails(id));
+  });
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -37,32 +46,20 @@ const MealDetailsScreen = (props) => {
     });
   });
 
-  const { itemId } = props.route.params;
-
-  const selectedMeal = MEALS.find((meal) => meal.id === itemId);
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image source={{ uri: selectedMeal.imageUrl }} style={styles.image} />
-      <View style={styles.details}>
-        <Text style={styles.text}>{selectedMeal.duration}min</Text>
-        <Text style={styles.text}>{selectedMeal.complexity}</Text>
-        <Text style={styles.text}>{selectedMeal.affordability}</Text>
-      </View>
+      <Image source={{ uri: meal.strMealThumb }} style={styles.image} />
       <Text style={styles.textTitle}>Ingredients</Text>
-      {selectedMeal.ingredients.map((ing) => (
+      {/* {meal.ingredients.map((ing) => (
         <View style={styles.itemContainer} key={ing}>
           <Entypo name="dot-single" size={24} color={theme.colors.primary} />
           <Text style={styles.normalText}>{ing}</Text>
         </View>
-      ))}
+      ))} */}
       <Text style={styles.textTitle}>Preparation</Text>
-      {selectedMeal.steps.map((step) => (
-        <View style={styles.itemContainer} key={step}>
-          <Entypo name="dot-single" size={24} color={theme.colors.primary} />
-          <Text style={styles.normalText}>{step}</Text>
-        </View>
-      ))}
+      <View style={styles.itemContainer}>
+        <Text style={styles.normalText}>{meal.strInstructions}</Text>
+      </View>
     </ScrollView>
   );
 };

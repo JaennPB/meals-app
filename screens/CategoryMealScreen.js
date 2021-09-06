@@ -1,35 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FlatList } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 
 import MealCard from "../components/MealCard";
-import { MEALS } from "../data/dummyData";
+
+import { fetchByCategory } from "../store/mealsSlice";
 
 const CategoryMealsScreen = (props) => {
-  const { itemId } = props.route.params;
+  const { type } = props.route.params;
+  const mealsByCategory = useSelector((state) => state.meals.mealsByCategory);
+  const dispatch = useDispatch();
 
-  const displayedItems = MEALS.filter(
-    (meal) => meal.categoryIds.indexOf(itemId) >= 0
-  );
+  useEffect(() => {
+    dispatch(fetchByCategory(type));
+  }, [dispatch]);
 
-  const renderItem = (item) => {
+  const renderItem = ({ item }) => {
     return (
       <MealCard
         onPress={() => {
           props.navigation.navigate("MealDetails", {
-            itemId: item.item.id,
-            itemTitle: item.item.title,
+            type: item.strMeal,
+            id: item.idMeal,
           });
         }}
-        title={item.item.title}
-        duration={item.item.duration}
-        affordability={item.item.affordability}
-        complexity={item.item.complexity}
-        imageUrl={item.item.imageUrl}
+        title={item.strMeal}
+        imageUrl={item.strMealThumb}
       />
     );
   };
 
-  return <FlatList data={displayedItems} renderItem={renderItem} />;
+  return (
+    <FlatList
+      data={mealsByCategory}
+      keyExtractor={(item) => item.strMeal}
+      renderItem={renderItem}
+    />
+  );
 };
 
 export default CategoryMealsScreen;

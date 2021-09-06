@@ -1,13 +1,22 @@
-import React, { useLayoutEffect } from "react";
-import { Pressable, FlatList } from "react-native";
+import React, { useLayoutEffect, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Pressable, FlatList, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import CategoryCard from "../components/CategoryCard";
-import { CATEGORIES } from "../data/dummyData";
+
+import { fetchCategories } from "../store/mealsSlice";
 
 import theme from "../theme/theme";
 
 const CategoriesScreen = (props) => {
+  const mealCategories = useSelector((state) => state.meals.AllCategories);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
   useLayoutEffect(() => {
     props.navigation.setOptions({
       headerLeft: () => {
@@ -25,22 +34,29 @@ const CategoriesScreen = (props) => {
     });
   });
 
-  const renderItem = (item) => {
+  const renderItem = ({ item }) => {
     return (
       <CategoryCard
-        title={item.item.title}
-        color={item.item.color}
+        title={item.strCategory}
+        color="lightblue"
+        backImage={item.strCategoryThumb}
         onPress={() => {
           props.navigation.navigate("CategoryMeals", {
-            itemId: item.item.id,
-            itemTitle: item.item.title,
+            type: item.strCategory,
           });
         }}
       />
     );
   };
 
-  return <FlatList data={CATEGORIES} renderItem={renderItem} numColumns={2} />;
+  return (
+    <FlatList
+      data={mealCategories}
+      keyExtractor={(item) => item.strCategory}
+      renderItem={renderItem}
+      numColumns={2}
+    />
+  );
 };
 
 export default CategoriesScreen;

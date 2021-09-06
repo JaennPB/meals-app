@@ -36,14 +36,14 @@ const StackNavigator = (props) => {
         name="CategoryMeals"
         component={CategoryMealsScreen}
         options={({ route }) => ({
-          title: route.params.itemTitle,
+          title: route.params.type,
         })}
       />
       <Stack.Screen
         name="MealDetails"
         component={MealDetailsScreen}
         options={({ route }) => ({
-          title: route.params.itemTitle,
+          title: route.params.type,
         })}
       />
     </Stack.Navigator>
